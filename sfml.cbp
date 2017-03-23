@@ -32,6 +32,11 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="sfml-window" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-system" />
+					<Add library="sfml-network" />
+					<Add library="sfml-audio" />
 				</Linker>
 			</Target>
 		</Build>
@@ -42,7 +47,9 @@
 		<Linker>
 			<Add directory="./lib" />
 		</Linker>
-		<Unit filename="main.cpp" />
+		<Unit filename="Sockets.cpp" />
+		<Unit filename="TCP.cpp" />
+		<Unit filename="UDP.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
