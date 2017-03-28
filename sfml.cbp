@@ -13,13 +13,15 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="./include" />
 				</Compiler>
 				<Linker>
+					<Add library="sfml-network-d" />
+					<Add library="sfml-system-d" />
 					<Add library="sfml-window-d" />
 					<Add library="sfml-graphics-d" />
-					<Add library="sfml-system-d" />
-					<Add library="sfml-network-d" />
 					<Add library="sfml-audio-d" />
+					<Add directory="./lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -32,11 +34,11 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="sfml-window" />
-					<Add library="sfml-graphics" />
 					<Add library="sfml-system" />
-					<Add library="sfml-network" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-window" />
 					<Add library="sfml-audio" />
+					<Add library="sfml-network" />
 				</Linker>
 			</Target>
 		</Build>

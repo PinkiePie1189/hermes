@@ -8,7 +8,6 @@ void runTcpServer(unsigned short port);
 void runTcpClient(unsigned short port);
 void runUdpServer(unsigned short port);
 void runUdpClient(unsigned short port);
-
 sf::RenderWindow Wind(sf::VideoMode(640, 480),"Hermes", sf::Style::Close);
 sf::Texture menu;
 sf::Sprite menusprite;
@@ -16,9 +15,7 @@ sf::Sprite menusprite;
 int main() {
     Wind.setFramerateLimit(60);
     menu.loadFromFile("res/1.png");
-    radioHover.loadFromFile("res/buttons/hover.png");
     menusprite.setTexture(menu);
-    RadioHover
     while (Wind.isOpen()) {
         sf::Event event;
         Wind.clear(sf::Color::Black);
@@ -29,14 +26,6 @@ int main() {
                 Wind.close();
         }
         sf::Vector2i CursorPos = sf::Mouse::getPosition(Wind);
-
-        radioHoverSp.setPosition(680,480);
-
-        if (CursorPos.x >= 259 && CursorPos.x <= 268)
-            if (CursorPos.y >= 288 && CursorPos.y <= 297) {
-                radioHoverSp.setPosition(259,287);
-                Wind.draw(radioHoverSp);
-            }
 
         Wind.display();
     }
@@ -59,9 +48,10 @@ int main() {
             runTcpServer(port);
         else
             runTcpClient(port);
-    } else {
-        // Test the unconnected UDP protocol
-        if (who == 's')
+    }
+    else
+    {
+        if(who=='s')
             runUdpServer(port);
         else
             runUdpClient(port);
