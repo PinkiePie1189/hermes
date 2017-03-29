@@ -1,33 +1,23 @@
 #include <iostream>
 #include <cstdlib>
 #include <SFML/Graphics.hpp>
-#include "Radio.h"
+#include <ProtocolSelection.h>
 using namespace std;
 
 void runTcpServer(unsigned short port);
 void runTcpClient(unsigned short port);
 void runUdpServer(unsigned short port);
 void runUdpClient(unsigned short port);
-sf::RenderWindow Wind(sf::VideoMode(640, 480),"Hermes", sf::Style::Close);
-sf::Texture menu;
-sf::Sprite menusprite;
-
-int main() {
-    Wind.setFramerateLimit(60);
-    menu.loadFromFile("res/1.png");
-    menusprite.setTexture(menu);
-    while (Wind.isOpen()) {
-        sf::Event event;
-        Wind.clear(sf::Color::Black);
-        Wind.draw(menusprite);
-
-        while (Wind.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                Wind.close();
-        }
-        sf::Vector2i CursorPos = sf::Mouse::getPosition(Wind);
-
-        Wind.display();
+void initWindow();
+sf::RenderWindow Wind;
+int main()
+{
+    initWindow();
+    ProtocolSelection protselect;
+    Scene* currScene=&protselect;
+    while(currScene!=NULL)
+    {
+        currScene=currScene->Run(Wind);
     }
     /*sf::Thread RenderEngine(&Render);
     RenderEngine.launch();*/
@@ -42,7 +32,8 @@ int main() {
     std::cout << "Do you want to be a server (s) or a client (c)? ";
     std::cin  >> who;
 
-    if (protocol == 't') {
+    if (protocol == 't')
+    {
         // Test the TCP protocol
         if (who == 's')
             runTcpServer(port);
@@ -63,4 +54,12 @@ int main() {
     std::cin.ignore(10000, '\n');
 
     return EXIT_SUCCESS;
+}
+void initWindow()
+{
+    Wind.create(sf::VideoMode(640, 480),"Hermes", sf::Style::Close);
+    Wind.setFramerateLimit(60);
+    sf::Image icon;
+    icon.loadFromFile("res/icons/ico.png");
+    Wind.setIcon(icon.getSize().x,icon.getSize().y,icon.getPixelsPtr());
 }
