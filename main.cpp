@@ -19,8 +19,6 @@ int main()
     {
         currScene=currScene->Run(Wind);
     }
-    /*sf::Thread RenderEngine(&Render);
-    RenderEngine.launch();*/
     const unsigned short port = 50001;
 
     char protocol;

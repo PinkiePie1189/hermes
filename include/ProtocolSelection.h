@@ -2,7 +2,7 @@
 #define PROTOCOLSELECTION_H
 
 #include <Scene.h>
-
+#include<Button.h>
 
 class ProtocolSelection : public Scene
 {
@@ -16,6 +16,8 @@ class ProtocolSelection : public Scene
     private:
         sf::Sprite bg_sprite;
         sf::Texture bg_texture;
+        Button TCP;
+        Button UDP;
 };
 
 #endif // PROTOCOLSELECTION_H
