@@ -10,6 +10,7 @@ void runUdpServer(unsigned short port);
 void runUdpClient(unsigned short port);
 void initWindow();
 sf::RenderWindow Wind;
+char protocol;
 int main()
 {
     initWindow();
@@ -20,16 +21,10 @@ int main()
         currScene=currScene->Run(Wind);
     }
     const unsigned short port = 50001;
-
-    char protocol;
-    std::cout << "Do you want to use TCP (t) or UDP (u)? ";
-    std::cin  >> protocol;
-
     // Client or server ?
     char who;
     std::cout << "Do you want to be a server (s) or a client (c)? ";
     std::cin  >> who;
-
     if (protocol == 't')
     {
         // Test the TCP protocol

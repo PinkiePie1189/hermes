@@ -50,10 +50,18 @@ void Button::Update(sf::RenderWindow& Wind)
 void Button::Click(bool arg)
 {
     clicked=arg;
+    if(clicked)
+    {
+        currTexture=text_clicked;
+    }
+    else
+    {
+        currTexture=text_idle;
+    }
 }
 bool Button::MouseInside(sf::RenderWindow& Wind)
 {
     sf::FloatRect aux(position.x,position.y,sizer.x,sizer.y);
-    int mousex=sf::Mouse::getPosition(Wind).x,mousey=sf::Mouse::getPosition(Wind).y;
+    float mousex=sf::Mouse::getPosition(Wind).x,mousey=sf::Mouse::getPosition(Wind).y;
     return aux.contains(mousex,mousey);
 }

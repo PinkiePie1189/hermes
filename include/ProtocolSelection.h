@@ -3,7 +3,7 @@
 
 #include <Scene.h>
 #include<Button.h>
-
+extern char protocol;
 class ProtocolSelection : public Scene
 {
     public:
@@ -18,6 +18,7 @@ class ProtocolSelection : public Scene
         sf::Texture bg_texture;
         Button TCP;
         Button UDP;
+        Button Next;
 };
 
 #endif // PROTOCOLSELECTION_H
