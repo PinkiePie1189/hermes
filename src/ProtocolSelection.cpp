@@ -7,6 +7,9 @@ ProtocolSelection::ProtocolSelection()
     TCP=Button("res/buttons/idle.png","res/buttons/hover.png","res/buttons/clicked.png",sf::Vector2f(261,286));
     UDP=Button("res/buttons/idle.png","res/buttons/hover.png","res/buttons/clicked.png",sf::Vector2f(261,305));
     Next=Button("res/buttons/next_idle.png","res/buttons/next_idle.png","res/buttons/next_clicked.png",sf::Vector2f(352,339));
+    protocol='t';
+    TCP.Click(1);
+    CurrentClicked=&TCP;
 }
 
 ProtocolSelection::~ProtocolSelection()
@@ -17,9 +20,7 @@ Scene* ProtocolSelection::Run(sf::RenderWindow& Wind)
 {
     sf::Event ev;
     bool ok=false;
-    protocol='t';
-    TCP.Click(1);
-    while(1)
+    while(Wind.isOpen())
     {
         Wind.clear();
         while(Wind.pollEvent(ev))
@@ -35,14 +36,16 @@ Scene* ProtocolSelection::Run(sf::RenderWindow& Wind)
                 {
                     if(TCP.MouseInside(Wind))
                     {
-                        TCP.Click(1);
-                        UDP.Click(0);
+                        CurrentClicked->Click(0);
+                        CurrentClicked=&TCP;
+                        CurrentClicked->Click(1);
                         protocol='t';
                     }
                     if(UDP.MouseInside(Wind))
                     {
-                        UDP.Click(1);
-                        TCP.Click(0);
+                        CurrentClicked->Click(0);
+                        CurrentClicked=&UDP;
+                        CurrentClicked->Click(1);
                         protocol='u';
                     }
                     if(Next.MouseInside(Wind))
@@ -57,8 +60,11 @@ Scene* ProtocolSelection::Run(sf::RenderWindow& Wind)
                 {
                     if(Next.MouseInside(Wind)&& ok)
                     {
-                        Wind.close();
-                        return NULL;
+                        if(sideselect==NULL)
+                        {
+                            sideselect=new SideSelection;
+                        }
+                        return sideselect;
                     }
                     else
                     {
@@ -77,4 +83,5 @@ Scene* ProtocolSelection::Run(sf::RenderWindow& Wind)
         Next.Draw(Wind);
         Wind.display();
     }
+    return NULL;
 }

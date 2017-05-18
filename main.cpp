@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <SFML/Graphics.hpp>
 #include <ProtocolSelection.h>
+#include<SideSelection.h>
+#define DEBUG
 using namespace std;
 
 void runTcpServer(unsigned short port);
@@ -11,20 +13,21 @@ void runUdpClient(unsigned short port);
 void initWindow();
 sf::RenderWindow Wind;
 char protocol;
+char who;
+//Scenes
+Scene* protselect=new ProtocolSelection;
+Scene* sideselect=NULL;
+Scene* ipselect=NULL;
+//Scenes
 int main()
 {
     initWindow();
-    ProtocolSelection protselect;
-    Scene* currScene=&protselect;
+    Scene* currScene=protselect;
     while(currScene!=NULL)
     {
         currScene=currScene->Run(Wind);
     }
     const unsigned short port = 50001;
-    // Client or server ?
-    char who;
-    std::cout << "Do you want to be a server (s) or a client (c)? ";
-    std::cin  >> who;
     if (protocol == 't')
     {
         // Test the TCP protocol
@@ -44,6 +47,7 @@ int main()
     // Wait until the user presses 'enter' key
     std::cout << "Press enter to exit..." << std::endl;
     std::cin.ignore(10000, '\n');
+
     std::cin.ignore(10000, '\n');
 
     return EXIT_SUCCESS;

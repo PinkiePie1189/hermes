@@ -3,7 +3,9 @@
 
 #include <Scene.h>
 #include<Button.h>
+#include<SideSelection.h>
 extern char protocol;
+extern Scene* sideselect;
 class ProtocolSelection : public Scene
 {
     public:
@@ -19,6 +21,7 @@ class ProtocolSelection : public Scene
         Button TCP;
         Button UDP;
         Button Next;
+        Button* CurrentClicked;
 };
 
 #endif // PROTOCOLSELECTION_H
