@@ -27,6 +27,7 @@ int main()
     {
         currScene=currScene->Run(Wind);
     }
+    Wind.close();
     const unsigned short port = 50001;
     if (protocol == 't')
     {

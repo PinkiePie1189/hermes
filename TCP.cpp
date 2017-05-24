@@ -21,7 +21,7 @@ char in[256];
 char Nick[32];
 char oNick[32];
 int SEND = 0;
-
+sf::IpAddress server;
 void SENDER() {
     std::cout << "SEND TUNNEL ACTIVE!\n";
     while (true) {
@@ -75,14 +75,6 @@ void runTcpServer(unsigned short port)
 ////////////////////////////////////////////////////////////
 void runTcpClient(unsigned short port)
 {
-    sf::IpAddress server;
-    do
-    {
-        std::cout << "Type the address or name of the server to connect to: ";
-        std::cin  >> server;
-    }
-    while (server == sf::IpAddress::None);
-
     if (socket.connect(server, port) != sf::Socket::Done)
         return;
     std::cout << "Connected to server " << server << std::endl;

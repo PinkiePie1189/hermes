@@ -2,6 +2,8 @@
 #define IPSELECTION_H
 #include<Scene.h>
 #include<TextBox.h>
+#include<SFML/Network.hpp>
+extern sf::IpAddress server;
 class IpSelection : public Scene
 {
     public:
@@ -11,7 +13,7 @@ class IpSelection : public Scene
     protected:
 
     private:
-        TextBox ipBox;
+        TextBox* ipBox;
 };
 
 #endif // IPSELECTION_H

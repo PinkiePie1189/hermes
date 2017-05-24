@@ -19,9 +19,12 @@ TextBox::~TextBox()
 TextBox::TextBox(std::string font_path,int font_size,sf::Color font_color)
 {
     font.loadFromFile(font_path);
+    text.setFont(font);
     text.setCharacterSize(font_size);
     text.setFillColor(font_color);
     text.setPosition(sf::Vector2f(0,0));
+    cursorpos=0;
+    TextString.push_back('|');
 }
 void TextBox::Draw(sf::RenderWindow& Wind)
 {
@@ -73,4 +76,10 @@ void TextBox::UpdateCursor(sf::Event& ev)
             cursorpos++;
         }
     }
+}
+std::string TextBox::GetTextString()
+{
+    std::string aux=TextString;
+    aux.erase(aux.begin()+cursorpos,aux.begin()+cursorpos+1);//To remove the cursor
+    return aux;
 }
