@@ -6,6 +6,7 @@
 #include<SFML/Network.hpp>
 #include<SFML/Graphics.hpp>
 extern sf::IpAddress server;
+extern Scene* sideselect;
 class IpSelection : public Scene
 {
     public:

@@ -77,7 +77,7 @@ Scene* IpSelection::Run(sf::RenderWindow& Wind)
                     }
                     if(Back->MouseInside(Wind) && okBack)
                     {
-                        return NULL;
+                        return sideselect;
                     }
                     else
                     {
