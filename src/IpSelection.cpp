@@ -3,11 +3,7 @@
 IpSelection::IpSelection()
 {
     //ctor
-<<<<<<< HEAD
     ipBox=new TextBox("res/fonts/micross.ttf",12,sf::Color::White,sf::Vector2f(300,300));
-=======
-    ipBox=new TextBox("res/fonts/micross.ttf",12,sf::Color::White);
->>>>>>> origin/Temp
 }
 
 IpSelection::~IpSelection()
@@ -35,11 +31,8 @@ Scene* IpSelection::Run(sf::RenderWindow& Wind)
                 }
                 else if(ev.text.unicode==13)
                 {
-<<<<<<< HEAD
-=======
                     server=sf::IpAddress(ipBox->GetTextString());
                     return NULL;
->>>>>>> origin/Temp
                     ipBox->Enter();
                 }
                 else

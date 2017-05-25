@@ -13,7 +13,6 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add directory="./include" />
 					<Add directory="include" />
 				</Compiler>
 				<Linker>
@@ -22,7 +21,6 @@
 					<Add library="sfml-window-d" />
 					<Add library="sfml-graphics-d" />
 					<Add library="sfml-audio-d" />
-					<Add directory="./lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">

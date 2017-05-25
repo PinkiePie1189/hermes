@@ -22,11 +22,7 @@ TextBox::TextBox(std::string font_path,int font_size,sf::Color font_color,sf::Ve
     text.setFont(font);
     text.setCharacterSize(font_size);
     text.setFillColor(font_color);
-<<<<<<< HEAD
     text.setPosition(position);
-=======
-    text.setPosition(sf::Vector2f(0,0));
->>>>>>> origin/Temp
     cursorpos=0;
     TextString.push_back('|');
 }
@@ -75,7 +71,6 @@ void TextBox::UpdateCursor(sf::Event& ev)
         }
     }
 }
-<<<<<<< HEAD
 void TextBox::Left()
 {
     if(cursorpos>0)
@@ -104,11 +99,10 @@ void TextBox::MoveCursorAtIndex(int index)
     {
         Left();
     }
-=======
+}
 std::string TextBox::GetTextString()
 {
     std::string aux=TextString;
     aux.erase(aux.begin()+cursorpos,aux.begin()+cursorpos+1);//To remove the cursor
     return aux;
->>>>>>> origin/Temp
 }
