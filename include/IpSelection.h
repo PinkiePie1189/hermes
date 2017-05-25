@@ -2,7 +2,9 @@
 #define IPSELECTION_H
 #include<Scene.h>
 #include<TextBox.h>
+#include<Button.h>
 #include<SFML/Network.hpp>
+#include<SFML/Graphics.hpp>
 extern sf::IpAddress server;
 class IpSelection : public Scene
 {
@@ -14,6 +16,11 @@ class IpSelection : public Scene
 
     private:
         TextBox* ipBox;
+        Button* ipBoxBackground;
+        Button* Next;
+        Button* Back;
+        sf::Texture bg_texture;
+        sf::Sprite bg_sprite;
 };
 
 #endif // IPSELECTION_H
