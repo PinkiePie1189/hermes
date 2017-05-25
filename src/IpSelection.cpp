@@ -3,12 +3,13 @@
 IpSelection::IpSelection()
 {
     //ctor
-    //ipBox=TextBox("res/fonts/micross.ttf",12,sf::Color::White);
+    ipBox=new TextBox("res/fonts/micross.ttf",12,sf::Color::White,sf::Vector2f(300,300));
 }
 
 IpSelection::~IpSelection()
 {
     //dtor
+    delete ipBox;
 }
 Scene* IpSelection::Run(sf::RenderWindow& Wind)
 {
@@ -26,21 +27,21 @@ Scene* IpSelection::Run(sf::RenderWindow& Wind)
             {
                 if(ev.text.unicode=='\b')
                 {
-                    ipBox.Backspace();
+                    ipBox->Backspace();
                 }
                 else if(ev.text.unicode==13)
                 {
-                    ipBox.Enter();
+                    ipBox->Enter();
                 }
                 else
                 {
-                    ipBox.AddChar((char) ev.text.unicode);
+                    ipBox->AddChar((char) ev.text.unicode);
                 }
             }
-            ipBox.UpdateCursor(ev);
+            ipBox->UpdateCursor(ev);
         }
         Wind.clear(sf::Color::Black);
-        ipBox.Draw(Wind);
+        ipBox->Draw(Wind);
         Wind.display();
     }
     return NULL;

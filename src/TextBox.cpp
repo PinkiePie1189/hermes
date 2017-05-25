@@ -1,5 +1,5 @@
 #include "TextBox.h"
-
+#define DBG
 TextBox::TextBox()
 {
     //ctor
@@ -16,18 +16,19 @@ TextBox::~TextBox()
 {
     //dtor
 }
-TextBox::TextBox(std::string font_path,int font_size,sf::Color font_color)
+TextBox::TextBox(std::string font_path,int font_size,sf::Color font_color,sf::Vector2f position)
 {
     font.loadFromFile(font_path);
+    text.setFont(font);
     text.setCharacterSize(font_size);
     text.setFillColor(font_color);
-    text.setPosition(sf::Vector2f(0,0));
+    text.setPosition(position);
+    cursorpos=0;
+    TextString.push_back('|');
 }
 void TextBox::Draw(sf::RenderWindow& Wind)
 {
     text.setString(TextString.c_str());
-    system("cls");
-    printf("%s %d %d",TextString.c_str(),TextString.size(),cursorpos);
     Wind.draw(text);
 }
 void TextBox::AddChar(char c)
@@ -60,17 +61,42 @@ void TextBox::UpdateCursor(sf::Event& ev)
 {
     if(ev.type==sf::Event::KeyPressed)
     {
-        if(ev.key.code==sf::Keyboard::Left && cursorpos>0)
+        if(ev.key.code==sf::Keyboard::Left)
         {
-            TextString[cursorpos]=TextString[cursorpos-1];
-            TextString[cursorpos-1]='|';
-            cursorpos--;
+            Left();
         }
-        if(ev.key.code==sf::Keyboard::Right && cursorpos<TextString.size()-1)
+        if(ev.key.code==sf::Keyboard::Right)
         {
-            TextString[cursorpos]=TextString[cursorpos+1];
-            TextString[cursorpos+1]='|';
-            cursorpos++;
+            Right();
         }
+    }
+}
+void TextBox::Left()
+{
+    if(cursorpos>0)
+    {
+        TextString[cursorpos]=TextString[cursorpos-1];
+        TextString[cursorpos-1]='|';
+        cursorpos--;
+    }
+}
+void TextBox::Right()
+{
+    if(cursorpos<TextString.size()-1)
+    {
+        TextString[cursorpos]=TextString[cursorpos+1];
+        TextString[cursorpos+1]='|';
+        cursorpos++;
+    }
+}
+void TextBox::MoveCursorAtIndex(int index)
+{
+    while(index<cursorpos)
+    {
+        Right();
+    }
+    while(index>cursorpos)
+    {
+        Left();
     }
 }

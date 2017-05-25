@@ -11,7 +11,7 @@ class IpSelection : public Scene
     protected:
 
     private:
-        TextBox ipBox;
+        TextBox* ipBox;
 };
 
 #endif // IPSELECTION_H
