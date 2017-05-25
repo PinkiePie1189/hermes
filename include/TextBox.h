@@ -3,7 +3,6 @@
 #include<string>
 #include<sstream>
 #include<SFML/Graphics.hpp>
-#include<windows.h>
 class TextBox
 {
     public:
@@ -17,6 +16,7 @@ class TextBox
         void Right();
         void MoveCursorAtIndex(int);
         void UpdateCursor(sf::Event& ev);
+        std::string GetTextString();
         virtual ~TextBox();
 
     protected:

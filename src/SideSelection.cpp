@@ -65,11 +65,15 @@ Scene* SideSelection::Run(sf::RenderWindow& Wind)
                 {
                     if(Next.MouseInside(Wind)&& okNext)
                     {
-                        if(ipselect==NULL)
+                        if(who=='c')
                         {
-                            ipselect=new IpSelection;
+                            if(ipselect==NULL)
+                            {
+                                ipselect=new IpSelection;
+                            }
+                            return ipselect;
                         }
-                        return ipselect;
+                        return NULL;
                     }
                     else
                     {

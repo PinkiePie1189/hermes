@@ -2,6 +2,8 @@
 #define IPSELECTION_H
 #include<Scene.h>
 #include<TextBox.h>
+#include<SFML/Network.hpp>
+extern sf::IpAddress server;
 class IpSelection : public Scene
 {
     public:
