@@ -65,6 +65,14 @@ Scene* SideSelection::Run(sf::RenderWindow& Wind)
                 {
                     if(Next.MouseInside(Wind)&& okNext)
                     {
+                        if(who=='s')
+                        {
+                            if(connectionwait==NULL)
+                            {
+                                connectionwait=new WaitForConnectionServer;
+                            }
+                            return connectionwait;
+                        }
                         if(who=='c')
                         {
                             if(ipselect==NULL)

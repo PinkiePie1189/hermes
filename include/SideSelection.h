@@ -4,8 +4,10 @@
 #include<Button.h>
 #include<ProtocolSelection.h>
 #include<IpSelection.h>
+#include<WaitForConnectionServer.h>
 extern Scene* protselect;
 extern Scene* ipselect;
+extern Scene* connectionwait;
 extern char who;
 class SideSelection : public Scene
 {

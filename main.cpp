@@ -18,6 +18,7 @@ char who;
 Scene* protselect=new ProtocolSelection;
 Scene* sideselect=NULL;
 Scene* ipselect=NULL;
+Scene* connectionwait=NULL;
 //Scenes
 int main()
 {

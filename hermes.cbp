@@ -57,6 +57,7 @@
 		<Unit filename="include/Scene.h" />
 		<Unit filename="include/SideSelection.h" />
 		<Unit filename="include/TextBox.h" />
+		<Unit filename="include/WaitForConnectionServer.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
@@ -67,6 +68,7 @@
 		<Unit filename="src/Scene.cpp" />
 		<Unit filename="src/SideSelection.cpp" />
 		<Unit filename="src/TextBox.cpp" />
+		<Unit filename="src/WaitForConnectionServer.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
