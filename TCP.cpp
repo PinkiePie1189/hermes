@@ -40,14 +40,6 @@ void RECEIVER() {
 
 void runTcpServer(unsigned short port)
 {
-    sf::TcpListener listener;
-    if (listener.listen(port) != sf::Socket::Done)
-        return;
-    std::cout << "Server is listening to port " << port << ", waiting for connections... " << std::endl;
-
-    if (listener.accept(socket) != sf::Socket::Done)
-        return;
-    std::cout << "Client connected: " << socket.getRemoteAddress() << std::endl;
 
     /*if (SEND)
         std::cout << "COMMUNICATION MODE: SEND" << std::endl;

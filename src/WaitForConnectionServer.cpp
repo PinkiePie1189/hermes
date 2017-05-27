@@ -1,5 +1,4 @@
 #include "WaitForConnectionServer.h"
-
 WaitForConnectionServer::WaitForConnectionServer()
 {
     //ctor
@@ -17,6 +16,12 @@ Scene* WaitForConnectionServer::Run(sf::RenderWindow& Wind)
 {
     sf::Event ev;
     bool okCancel=false;
+    foundConnection=false;
+    if (listener.listen(port) != sf::Socket::Done)
+        return NULL;
+    std::cout << "Server is listening to port " << port << ", waiting for connections... " << std::endl;
+    sf::Thread thr(&WaitForConnectionServer::Wait,this);
+    thr.launch();
     while(Wind.isOpen())
     {
         while(Wind.pollEvent(ev))
@@ -42,6 +47,8 @@ Scene* WaitForConnectionServer::Run(sf::RenderWindow& Wind)
                 {
                     if(Cancel->MouseInside(Wind) && okCancel)
                     {
+                        thr.terminate();
+                        listener.close();
                         return sideselect;
                     }
                     else
@@ -51,12 +58,26 @@ Scene* WaitForConnectionServer::Run(sf::RenderWindow& Wind)
                 }
             }
 
+
+            if(foundConnection)
+            {
+                listener.close();
+                Wind.close();
+                return NULL;
+            }
+            Cancel->Click(Cancel->MouseInside(Wind) && okCancel);
+            Wind.clear();
+            Wind.draw(bg_sprite);
+            Cancel->Draw(Wind);
+            Wind.display();
         }
-        Cancel->Click(Cancel->MouseInside(Wind) && okCancel);
-        Wind.clear();
-        Wind.draw(bg_sprite);
-        Cancel->Draw(Wind);
-        Wind.display();
     }
     return NULL;
+}
+void WaitForConnectionServer::Wait()
+{
+    if (listener.accept(socket) != sf::Socket::Done)
+        return;
+    std::cout << "Client connected: " << socket.getRemoteAddress() << std::endl;
+    foundConnection=true;
 }

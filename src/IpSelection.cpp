@@ -69,7 +69,14 @@ Scene* IpSelection::Run(sf::RenderWindow& Wind)
                     if(Next->MouseInside(Wind)&& okNext)
                     {
                         server=sf::IpAddress(ipBox->GetTextString().c_str());
-                        return NULL;
+                        if (socket.connect(server, port) != sf::Socket::Done)
+                        {
+                            fprintf(stderr,"Invalid ip address! Check for spelling mistakes and try again!");
+                            return this;
+
+                        }
+                         return NULL;
+
                     }
                     else
                     {

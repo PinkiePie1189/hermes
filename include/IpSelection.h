@@ -7,6 +7,8 @@
 #include<SFML/Graphics.hpp>
 extern sf::IpAddress server;
 extern Scene* sideselect;
+extern sf::TcpSocket socket;
+extern const unsigned short port;
 class IpSelection : public Scene
 {
     public:

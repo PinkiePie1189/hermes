@@ -14,6 +14,7 @@ void initWindow();
 sf::RenderWindow Wind;
 char protocol;
 char who;
+const unsigned short port = 50001;
 //Scenes
 Scene* protselect=new ProtocolSelection;
 Scene* sideselect=NULL;
@@ -29,7 +30,6 @@ int main()
         currScene=currScene->Run(Wind);
     }
     Wind.close();
-    const unsigned short port = 50001;
     if (protocol == 't')
     {
         // Test the TCP protocol
