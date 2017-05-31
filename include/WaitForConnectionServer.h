@@ -5,6 +5,7 @@
 #include<SFML/Network.hpp>
 #include<Button.h>
 #include<iostream>
+#define NUMBER_OF_DOTS 3
 extern Scene* sideselect;
 extern sf::TcpSocket socket;
 extern const unsigned short port;
@@ -20,6 +21,9 @@ class WaitForConnectionServer : public Scene
         sf::Texture bg_texture;
         sf::Sprite bg_sprite;
         sf::TcpListener listener;
+        sf::Sprite dots_sprite;
+        sf::Texture dots_texture;
+        sf::IntRect dots_rect[NUMBER_OF_DOTS];
         bool foundConnection;
         Button* Cancel;
 
