@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1495908264 source:d:\work\_git\hermes\main.cpp
+1496320711 source:d:\work\_git\hermes\main.cpp
 	<iostream>
 	<cstdlib>
 	<SFML/Graphics.hpp>
@@ -407,14 +407,14 @@
 	<SFML/System.hpp>
 	<string>
 
-1495823467 d:\work\_git\hermes\include\sideselection.h
+1495910325 d:\work\_git\hermes\include\sideselection.h
 	<Scene.h>
 	<Button.h>
 	<ProtocolSelection.h>
 	<IpSelection.h>
 	<WaitForConnectionServer.h>
 
-1495908264 d:\work\_git\hermes\include\ipselection.h
+1496174173 d:\work\_git\hermes\include\ipselection.h
 	<Scene.h>
 	<TextBox.h>
 	<Button.h>
@@ -431,7 +431,7 @@
 1495736689 source:d:\work\_git\hermes\src\button.cpp
 	"Button.h"
 
-1495908448 source:d:\work\_git\hermes\src\ipselection.cpp
+1496174173 source:d:\work\_git\hermes\src\ipselection.cpp
 	"IpSelection.h"
 
 1495736689 source:d:\work\_git\hermes\src\protocolselection.cpp
@@ -440,10 +440,10 @@
 1495736689 source:d:\work\_git\hermes\src\scene.cpp
 	"Scene.h"
 
-1495823467 source:d:\work\_git\hermes\src\sideselection.cpp
+1495910325 source:d:\work\_git\hermes\src\sideselection.cpp
 	"SideSelection.h"
 
-1495898574 source:d:\work\_git\hermes\tcp.cpp
+1495910325 source:d:\work\_git\hermes\tcp.cpp
 	<SFML/Network.hpp>
 	<SFML/System.hpp>
 	<iostream>
@@ -2139,14 +2139,15 @@
 1495800858 source:c:\users\elev\hermes\src\waitforconnectionserver.cpp
 	"WaitForConnectionServer.h"
 
-1495908264 d:\work\_git\hermes\include\waitforconnectionserver.h
+1496319053 d:\work\_git\hermes\include\waitforconnectionserver.h
 	<Scene.h>
 	<SFML/Graphics.hpp>
 	<SFML/Network.hpp>
 	<Button.h>
 	<iostream>
+	<Animation.h>
 
-1495908264 source:d:\work\_git\hermes\src\waitforconnectionserver.cpp
+1496319739 source:d:\work\_git\hermes\src\waitforconnectionserver.cpp
 	"WaitForConnectionServer.h"
 
 1496268649 source:c:\work\hermes\main.cpp
@@ -2692,4 +2693,13 @@
 
 1496270102 source:c:\work\hermes\src\waitforconnectionserver.cpp
 	"WaitForConnectionServer.h"
+
+1496319414 d:\work\_git\hermes\include\animation.h
+	<stdio.h>
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<string.h>
+
+1496320180 source:d:\work\_git\hermes\src\animation.cpp
+	"Animation.h"
 

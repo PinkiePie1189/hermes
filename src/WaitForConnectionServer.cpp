@@ -5,18 +5,15 @@ WaitForConnectionServer::WaitForConnectionServer()
     bg_texture.loadFromFile("res/4.png");
     bg_sprite.setTexture(bg_texture);
     Cancel=new Button("res/buttons/cancel_idle.png","res/buttons/cancel_idle.png","res/buttons/cancel_clicked.png",sf::Vector2f(352,339));
-    dots_texture.loadFromFile("res/spritesheets/dots.png");
-    dots_sprite.setTexture(dots_texture);
-    dots_sprite.setPosition(sf::Vector2f(488,306));
-    dots_rect[0]=sf::IntRect(0,0,3,4);
-    dots_rect[1]=sf::IntRect(0,0,9,4);
-    dots_rect[2]=sf::IntRect(0,0,15,4);
+    dots_anim=new Animation("res/animations/dots.mm",sf::Vector2f(488.0f,306.0f));
+    dots_anim->SetLooped(1);
 }
 
 WaitForConnectionServer::~WaitForConnectionServer()
 {
     //dtor
     delete Cancel;
+    delete dots_anim;
 }
 Scene* WaitForConnectionServer::Run(sf::RenderWindow& Wind)
 {
@@ -28,8 +25,7 @@ Scene* WaitForConnectionServer::Run(sf::RenderWindow& Wind)
     std::cout << "Server is listening to port " << port << ", waiting for connections... " << std::endl;
     sf::Thread thr(&WaitForConnectionServer::Wait,this);
     thr.launch();
-    int frame=0;
-    dots_sprite.setTextureRect(dots_rect[frame]);
+    dots_anim->Play();
     while(Wind.isOpen())
     {
         while(Wind.pollEvent(ev))
@@ -73,14 +69,11 @@ Scene* WaitForConnectionServer::Run(sf::RenderWindow& Wind)
             Wind.close();
             return NULL;
         }
-        printf("%d",frame);
-        dots_sprite.setTextureRect(dots_rect[frame]);
-        frame++;
-        frame%=3;
+        dots_anim->Update();
         Cancel->Click(Cancel->MouseInside(Wind) && okCancel);
         Wind.clear();
         Wind.draw(bg_sprite);
-        Wind.draw(dots_sprite);
+        dots_anim->Draw(Wind);
         Cancel->Draw(Wind);
         Wind.display();
     }

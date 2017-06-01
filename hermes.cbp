@@ -51,6 +51,7 @@
 		</Linker>
 		<Unit filename="TCP.cpp" />
 		<Unit filename="UDP.cpp" />
+		<Unit filename="include/Animation.h" />
 		<Unit filename="include/Button.h" />
 		<Unit filename="include/IpSelection.h" />
 		<Unit filename="include/ProtocolSelection.h" />
@@ -59,9 +60,11 @@
 		<Unit filename="include/TextBox.h" />
 		<Unit filename="include/WaitForConnectionServer.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="res/animations/dots.mm" />
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="src/Animation.cpp" />
 		<Unit filename="src/Button.cpp" />
 		<Unit filename="src/IpSelection.cpp" />
 		<Unit filename="src/ProtocolSelection.cpp" />
