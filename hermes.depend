@@ -3323,7 +3323,7 @@
 	<SFML/Network/IpAddress.hpp>
 	<vector>
 
-1497685175 c:\users\mircea\desktop\tmp\hermes\include\messagescreen.h
+1497704329 c:\users\mircea\desktop\tmp\hermes\include\messagescreen.h
 	<Scene.h>
 	<SFML/Audio.hpp>
 	<SFMl/Network.hpp>
@@ -3485,7 +3485,7 @@
 	<SFML/Network.hpp>
 	<iostream>
 
-1497518373 source:c:\users\mircea\desktop\tmp\hermes\src\messagescreen.cpp
+1497704424 source:c:\users\mircea\desktop\tmp\hermes\src\messagescreen.cpp
 	"MessageScreen.h"
 
 1497703794 c:\users\mircea\desktop\tmp\hermes\include\nicknameselection.h

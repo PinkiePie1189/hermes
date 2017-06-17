@@ -1,12 +1,12 @@
 #ifndef MESSAGESCREEN_H
 #define MESSAGESCREEN_H
-
 #include <Scene.h>
 #include<SFML/Audio.hpp>
 #include<SFMl/Network.hpp>
 #include<TextBox.h>
 #define MAX_MESSAGES 22
 extern sf::TcpSocket socket;
+extern std::string nick;
 class MessageScreen : public Scene
 {
     public:

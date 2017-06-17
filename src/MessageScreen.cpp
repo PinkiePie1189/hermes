@@ -50,7 +50,7 @@ Scene* MessageScreen::Run(sf::RenderWindow& Wind)
                 else if(ev.text.unicode==13)
                 {
                     sf::Packet pak;
-                    std::string message=inputBox->GetTextString()+"\n";
+                    std::string message=nick+":"+inputBox->GetTextString()+"\n";
                     if(message!="\n")
                     {
                         pak<<message;
