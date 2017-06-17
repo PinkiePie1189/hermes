@@ -2818,10 +2818,11 @@
 1496414677 source:d:\work\_git\hermes\src\messagescreen.cpp
 	"MessageScreen.h"
 
-1497519188 source:c:\users\mircea\desktop\tmp\hermes\main.cpp
+1497703447 source:c:\users\mircea\desktop\tmp\hermes\main.cpp
 	<iostream>
 	<cstdlib>
 	<SFML/Graphics.hpp>
+	<NicknameSelection.h>
 	<ProtocolSelection.h>
 	<SideSelection.h>
 	<MessageScreen.h>
@@ -3486,4 +3487,15 @@
 
 1497518373 source:c:\users\mircea\desktop\tmp\hermes\src\messagescreen.cpp
 	"MessageScreen.h"
+
+1497703794 c:\users\mircea\desktop\tmp\hermes\include\nicknameselection.h
+	<Scene.h>
+	<Button.h>
+	<TextBox.h>
+	<ProtocolSelection.h>
+	<SFML/Graphics.hpp>
+	<string>
+
+1497703850 source:c:\users\mircea\desktop\tmp\hermes\src\nicknameselection.cpp
+	"NicknameSelection.h"
 

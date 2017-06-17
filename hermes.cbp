@@ -55,6 +55,7 @@
 		<Unit filename="include/Button.h" />
 		<Unit filename="include/IpSelection.h" />
 		<Unit filename="include/MessageScreen.h" />
+		<Unit filename="include/NicknameSelection.h" />
 		<Unit filename="include/ProtocolSelection.h" />
 		<Unit filename="include/Scene.h" />
 		<Unit filename="include/SideSelection.h" />
@@ -69,6 +70,7 @@
 		<Unit filename="src/Button.cpp" />
 		<Unit filename="src/IpSelection.cpp" />
 		<Unit filename="src/MessageScreen.cpp" />
+		<Unit filename="src/NicknameSelection.cpp" />
 		<Unit filename="src/ProtocolSelection.cpp" />
 		<Unit filename="src/Scene.cpp" />
 		<Unit filename="src/SideSelection.cpp" />

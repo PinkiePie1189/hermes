@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <SFML/Graphics.hpp>
+#include<NicknameSelection.h>
 #include <ProtocolSelection.h>
 #include<SideSelection.h>
 #include<MessageScreen.h>
@@ -13,11 +14,15 @@ void runUdpServer(unsigned short port);
 void runUdpClient(unsigned short port);
 void initWindow();
 sf::RenderWindow Wind;
+//Selections
 char protocol;
 char who;
 const unsigned short port = 50001;
+std::string nick;
+//Selections
 //Scenes
-Scene* protselect=new ProtocolSelection;
+Scene* nickselect=new NicknameSelection;
+Scene* protselect=NULL;
 Scene* sideselect=NULL;
 Scene* ipselect=NULL;
 Scene* connectionwait=NULL;
@@ -26,7 +31,7 @@ Scene* msgscreen=NULL;
 int main()
 {
     initWindow();
-    Scene* currScene=protselect;
+    Scene* currScene=nickselect;
     #ifdef DEBUG
     system("taskkill /f /im cb_console_runner.exe");
     //currScene=new MessageScreen;
