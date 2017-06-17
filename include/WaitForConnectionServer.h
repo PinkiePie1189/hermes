@@ -6,8 +6,9 @@
 #include<Button.h>
 #include<iostream>
 #include<Animation.h>
-#define NUMBER_OF_DOTS 3
+#include<MessageScreen.h>
 extern Scene* sideselect;
+extern Scene* msgscreen;
 extern sf::TcpSocket socket;
 extern const unsigned short port;
 class WaitForConnectionServer : public Scene
@@ -22,9 +23,6 @@ class WaitForConnectionServer : public Scene
         sf::Texture bg_texture;
         sf::Sprite bg_sprite;
         sf::TcpListener listener;
-        sf::Sprite dots_sprite;
-        sf::Texture dots_texture;
-        sf::IntRect dots_rect[NUMBER_OF_DOTS];
         Animation* dots_anim;
         bool foundConnection;
         Button* Cancel;

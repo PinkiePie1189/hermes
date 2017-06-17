@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <ProtocolSelection.h>
 #include<SideSelection.h>
+#include<MessageScreen.h>
 #define DEBUG
 using namespace std;
 
@@ -20,11 +21,16 @@ Scene* protselect=new ProtocolSelection;
 Scene* sideselect=NULL;
 Scene* ipselect=NULL;
 Scene* connectionwait=NULL;
+Scene* msgscreen=NULL;
 //Scenes
 int main()
 {
     initWindow();
     Scene* currScene=protselect;
+    #ifdef DEBUG
+    system("taskkill /f /im cb_console_runner.exe");
+    //currScene=new MessageScreen;
+    #endif // DEBUG
     while(currScene!=NULL)
     {
         currScene=currScene->Run(Wind);
@@ -51,7 +57,9 @@ int main()
     std::cin.ignore(10000, '\n');
 
     std::cin.ignore(10000, '\n');
-
+    #ifdef DEBUG
+    system("pause");
+    #endif // DEBUG
     return EXIT_SUCCESS;
 }
 void initWindow()

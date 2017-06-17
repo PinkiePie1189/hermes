@@ -75,8 +75,11 @@ Scene* IpSelection::Run(sf::RenderWindow& Wind)
                             return this;
 
                         }
-                         return NULL;
-
+                            if(msgscreen==NULL)
+                            {
+                                msgscreen=new MessageScreen;
+                            }
+                            return msgscreen;
                     }
                     else
                     {

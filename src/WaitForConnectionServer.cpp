@@ -66,8 +66,11 @@ Scene* WaitForConnectionServer::Run(sf::RenderWindow& Wind)
         if(foundConnection)
         {
             listener.close();
-            Wind.close();
-            return NULL;
+            if(msgscreen==NULL)
+            {
+                msgscreen=new MessageScreen;
+            }
+            return msgscreen;
         }
         dots_anim->Update();
         Cancel->Click(Cancel->MouseInside(Wind) && okCancel);

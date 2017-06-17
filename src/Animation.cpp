@@ -12,7 +12,6 @@ Animation::Animation(std::string MMPath,sf::Vector2f _position)
     int n=strlen(SpritePath);
     SpritePath[n-1]='\0';
     fscanf(fin,"%d",&number_of_frames);
-    printf("%d",number_of_frames);
     for(int i=0; i<number_of_frames; i++)
     {
         int ms;

@@ -5,8 +5,10 @@
 #include<Button.h>
 #include<SFML/Network.hpp>
 #include<SFML/Graphics.hpp>
+#include<MessageScreen.h>
 extern sf::IpAddress server;
 extern Scene* sideselect;
+extern Scene* msgscreen;
 extern sf::TcpSocket socket;
 extern const unsigned short port;
 class IpSelection : public Scene

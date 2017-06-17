@@ -14,6 +14,7 @@ class TextBox
         void Enter();
         void Left();
         void Right();
+        void Clear();
         void MoveCursorAtIndex(int);
         void UpdateCursor(sf::Event& ev);
         std::string GetTextString();

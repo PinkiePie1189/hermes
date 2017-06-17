@@ -106,3 +106,9 @@ std::string TextBox::GetTextString()
     aux.erase(aux.begin()+cursorpos,aux.begin()+cursorpos+1);//To remove the cursor
     return aux;
 }
+void TextBox::Clear()
+{
+    TextString.clear();
+    cursorpos=0;
+    TextString.push_back('|');
+}
