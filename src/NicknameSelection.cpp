@@ -57,7 +57,6 @@ Scene* NicknameSelection::Run(sf::RenderWindow& Wind)
                            protselect=new ProtocolSelection;
                        }
                        nick=NickBox->GetTextString();
-                       printf("%s",nick.c_str());
                        return protselect;
                     }
                     else

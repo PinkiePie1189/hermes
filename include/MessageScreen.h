@@ -4,9 +4,15 @@
 #include<SFML/Audio.hpp>
 #include<SFMl/Network.hpp>
 #include<TextBox.h>
+#include<bitset>
 #define MAX_MESSAGES 22
 extern sf::TcpSocket socket;
 extern std::string nick;
+struct Message
+{
+    std::string m_nick;
+    std::string m_message;
+};
 class MessageScreen : public Scene
 {
     public:
@@ -25,7 +31,10 @@ class MessageScreen : public Scene
         sf::SoundBuffer EntrySndBuf;
         sf::Font textFont;
         sf::Text m_messages;
-        std::vector<std::string> MessageRows;
+        sf::Text m_nicks;
+        sf::Text m_nicks_other;
+        std::vector<Message> MessageRows;
+        std::vector<Message> MessageRowsOthers;
         TextBox* inputBox;
         int firstRow,lastRow;
         int number_of_messages;

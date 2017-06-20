@@ -8,11 +8,19 @@ MessageScreen::MessageScreen()
     bg_texture.loadFromFile("res/5full.png");
     bg_sprite.setTexture(bg_texture);
     inputBox=new TextBox("res/fonts/micross.ttf",14,sf::Color::Black,sf::Vector2f(71,427));
-    textFont.loadFromFile("res/fonts/micross.ttf");
+    textFont.loadFromFile("res/fonts/anon.ttf");
     m_messages.setFont(textFont);
     m_messages.setCharacterSize(12);
     m_messages.setFillColor(sf::Color::Black);
     m_messages.setPosition(sf::Vector2f(70,66));
+    m_nicks.setFont(textFont);
+    m_nicks.setCharacterSize(12);
+    m_nicks.setFillColor(sf::Color::Red);
+    m_nicks.setPosition(sf::Vector2f(70,66));
+    m_nicks_other.setFont(textFont);
+    m_nicks_other.setCharacterSize(12);
+    m_nicks_other.setFillColor(sf::Color::Blue);
+    m_nicks_other.setPosition(sf::Vector2f(70,66));
     firstRow=0;
     lastRow=-1;
     number_of_messages=0;
@@ -50,10 +58,20 @@ Scene* MessageScreen::Run(sf::RenderWindow& Wind)
                 else if(ev.text.unicode==13)
                 {
                     sf::Packet pak;
-                    std::string message=nick+":"+inputBox->GetTextString()+"\n";
-                    if(message!="\n")
+                    Message toSend;
+                    toSend.m_nick=nick+": \n";
+                    toSend.m_message=inputBox->GetTextString()+"\n";
+                    if(toSend.m_message!="\n")
                     {
-                        pak<<message;
+                        std::string aux;
+                        printf("%d\n",toSend.m_nick.size());
+                        for(int i=1;i<=toSend.m_nick.size()-1;i++)
+                        {
+                            aux+=" ";
+                        }
+                        toSend.m_message=aux+toSend.m_message;
+                        printf("%s%s",toSend.m_nick.c_str(),toSend.m_message.c_str());
+                        pak<<toSend.m_nick<<toSend.m_message;
                         socket.send(pak);
                         number_of_messages++;
                         if(!scrollEnabled)
@@ -68,7 +86,11 @@ Scene* MessageScreen::Run(sf::RenderWindow& Wind)
                         {
                             ScrollToLastMessage();
                         }
-                        MessageRows.push_back(message);
+                        MessageRows.push_back(toSend);
+                        Message dummy;
+                        dummy.m_message="";
+                        dummy.m_nick="\n";
+                        MessageRowsOthers.push_back(dummy);
                         inputBox->Clear();
                     }
                 }
@@ -113,13 +135,20 @@ Scene* MessageScreen::Run(sf::RenderWindow& Wind)
 void MessageScreen::RECEIVER()
 {
     sf::Packet pak;
-    std::string in;
+    Message in;
+    std::string _nick,_mess;
     while(1)
     {
         socket.receive(pak);
-        if(pak>>in)
+        if(pak>>_nick>>_mess)
         {
-            MessageRows.push_back(in);
+            in.m_nick=_nick;
+            in.m_message=_mess;
+            MessageRowsOthers.push_back(in);
+            Message dummy;
+            dummy.m_message="";
+            dummy.m_nick="\n";
+            MessageRows.push_back(dummy);
             number_of_messages++;
             if(!scrollEnabled)
             {
@@ -143,10 +172,27 @@ void MessageScreen::RECEIVER()
 }
 void MessageScreen::DrawText(sf::RenderWindow& Wind)
 {
+    m_nicks.setPosition(sf::Vector2f(70,66));
+    m_messages.setPosition(sf::Vector2f(70,66));
     std::string aux;
-    for(int i=firstRow; i<=lastRow; i++)
+    for(int i=firstRow;i<=lastRow;i++)
     {
-        aux+=MessageRows[i];
+        aux+=MessageRows[i].m_nick;
+    }
+    m_nicks.setString(aux);
+    Wind.draw(m_nicks);
+    aux.clear();
+    for(int i=firstRow;i<=lastRow;i++)
+    {
+        aux+=MessageRowsOthers[i].m_nick;
+    }
+    m_nicks_other.setString(aux);
+    Wind.draw(m_nicks_other);
+    aux.clear();
+    for(int i=firstRow;i<=lastRow;i++)
+    {
+        aux+=MessageRows[i].m_message;
+        aux+=MessageRowsOthers[i].m_message;
     }
     m_messages.setString(aux);
     Wind.draw(m_messages);
@@ -156,4 +202,14 @@ void MessageScreen::ScrollToLastMessage()
     lastRow=number_of_messages-1;
     firstRow=lastRow-MAX_MESSAGES+1;
     printf("%d %d\n",lastRow,firstRow);
+}
+sf::Packet& operator <<(sf::Packet& packet, const Message& m)
+{
+    printf("Eu functionez <<");
+    return packet << m.m_nick << m.m_message;
+}
+sf::Packet& operator >>(sf::Packet& packet, Message& m)
+{
+    printf("Si eu >>");
+    return packet >> m.m_nick >> m.m_message;
 }
