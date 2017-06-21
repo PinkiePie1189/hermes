@@ -37,6 +37,7 @@ Scene* MessageScreen::Run(sf::RenderWindow& Wind)
     sf::Event ev;
     sf::Sound aux;
     aux.setBuffer(EntrySndBuf);
+    aux.setVolume(50.0f);
     aux.play();
     sf::Thread rcv(&MessageScreen::RECEIVER,this);
     rcv.launch();
@@ -57,41 +58,60 @@ Scene* MessageScreen::Run(sf::RenderWindow& Wind)
                 }
                 else if(ev.text.unicode==13)
                 {
-                    sf::Packet pak;
-                    Message toSend;
-                    toSend.m_nick=nick+": \n";
-                    toSend.m_message=inputBox->GetTextString()+"\n";
-                    if(toSend.m_message!="\n")
+                    std::string o_nick=nick+": \n";
+                    std::string o_message=inputBox->GetTextString();
+                    if(!o_message.empty())
                     {
-                        std::string aux;
-                        printf("%d\n",toSend.m_nick.size());
-                        for(int i=1;i<=toSend.m_nick.size()-1;i++)
+                        int n=o_message.size()-1;
+                        int i=0;
+                        const int AutonomyModifiedLineSize=LINE_SIZE-o_nick.size();
+                        do
                         {
-                            aux+=" ";
-                        }
-                        toSend.m_message=aux+toSend.m_message;
-                        printf("%s%s",toSend.m_nick.c_str(),toSend.m_message.c_str());
-                        pak<<toSend.m_nick<<toSend.m_message;
-                        socket.send(pak);
-                        number_of_messages++;
-                        if(!scrollEnabled)
-                        {
-                            if(number_of_messages==MAX_MESSAGES)
+                            sf::Packet pak;
+                            Message toSend;
+                            if(i==0)
                             {
-                                scrollEnabled=true;
+                                toSend.m_nick=o_nick;
                             }
-                            lastRow++;
+                            else
+                            {
+                                toSend.m_nick="\n";
+                            }
+                            toSend.m_message=o_message.substr(i,AutonomyModifiedLineSize)+"\n";
+                            if(toSend.m_message!="\n")
+                            {
+                                std::string aux;
+                                for(int i=1; i<=toSend.m_nick.size()-1; i++)
+                                {
+                                    aux+=" ";
+                                }
+                                toSend.m_message=aux+toSend.m_message;
+                                pak<<toSend.m_nick<<toSend.m_message;
+                                socket.send(pak);
+                                number_of_messages++;
+                                if(!scrollEnabled)
+                                {
+                                    if(number_of_messages==MAX_MESSAGES)
+                                    {
+                                        scrollEnabled=true;
+                                    }
+                                    lastRow++;
+                                }
+                                else
+                                {
+                                    ScrollToLastMessage();
+                                }
+                                MessageRows.push_back(toSend);
+                                printf("Am pushat %s%s! FR:%d LR:%d\n",toSend.m_nick.c_str(),toSend.m_message.c_str(),firstRow,lastRow);
+                                Message dummy;
+                                dummy.m_message="";
+                                dummy.m_nick="\n";
+                                MessageRowsOthers.push_back(dummy);
+                                inputBox->Clear();
+                            }
+                            i+=AutonomyModifiedLineSize;
                         }
-                        else
-                        {
-                            ScrollToLastMessage();
-                        }
-                        MessageRows.push_back(toSend);
-                        Message dummy;
-                        dummy.m_message="";
-                        dummy.m_nick="\n";
-                        MessageRowsOthers.push_back(dummy);
-                        inputBox->Clear();
+                        while(i<n);
                     }
                 }
                 else
@@ -175,21 +195,21 @@ void MessageScreen::DrawText(sf::RenderWindow& Wind)
     m_nicks.setPosition(sf::Vector2f(70,66));
     m_messages.setPosition(sf::Vector2f(70,66));
     std::string aux;
-    for(int i=firstRow;i<=lastRow;i++)
+    for(int i=firstRow; i<=lastRow; i++)
     {
         aux+=MessageRows[i].m_nick;
     }
     m_nicks.setString(aux);
     Wind.draw(m_nicks);
     aux.clear();
-    for(int i=firstRow;i<=lastRow;i++)
+    for(int i=firstRow; i<=lastRow; i++)
     {
         aux+=MessageRowsOthers[i].m_nick;
     }
     m_nicks_other.setString(aux);
     Wind.draw(m_nicks_other);
     aux.clear();
-    for(int i=firstRow;i<=lastRow;i++)
+    for(int i=firstRow; i<=lastRow; i++)
     {
         aux+=MessageRows[i].m_message;
         aux+=MessageRowsOthers[i].m_message;
@@ -202,14 +222,4 @@ void MessageScreen::ScrollToLastMessage()
     lastRow=number_of_messages-1;
     firstRow=lastRow-MAX_MESSAGES+1;
     printf("%d %d\n",lastRow,firstRow);
-}
-sf::Packet& operator <<(sf::Packet& packet, const Message& m)
-{
-    printf("Eu functionez <<");
-    return packet << m.m_nick << m.m_message;
-}
-sf::Packet& operator >>(sf::Packet& packet, Message& m)
-{
-    printf("Si eu >>");
-    return packet >> m.m_nick >> m.m_message;
 }

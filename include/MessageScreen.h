@@ -6,6 +6,7 @@
 #include<TextBox.h>
 #include<bitset>
 #define MAX_MESSAGES 22
+#define LINE_SIZE 61
 extern sf::TcpSocket socket;
 extern std::string nick;
 struct Message
