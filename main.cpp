@@ -5,6 +5,7 @@
 #include <ProtocolSelection.h>
 #include<SideSelection.h>
 #include<MessageScreen.h>
+#define DEBUG
 using namespace std;
 
 void runTcpServer(unsigned short port);
@@ -33,8 +34,6 @@ int main()
     Scene* currScene=nickselect;
     #ifdef DEBUG
     system("taskkill /f /im cb_console_runner.exe");
-    currScene=new MessageScreen;
-    nick="England";
     #endif // DEBUG
     while(currScene!=NULL)
     {

@@ -52,6 +52,9 @@ Scene* MessageScreen::Run(sf::RenderWindow& Wind)
         {
             if(ev.type==sf::Event::Closed)
             {
+                printf("am intrat");
+                SendDisconnectMessage();
+                socket.disconnect();
                 rcv.terminate();
                 Wind.close();
             }
@@ -66,13 +69,7 @@ Scene* MessageScreen::Run(sf::RenderWindow& Wind)
             {
                 if(okDC && DisconnectButton->MouseInside(Wind))
                 {
-                    Message dc_mess;
-                    dc_mess.m_nick=nick+" ";
-                    dc_mess.m_message="has disconnected!";
-                    dc_mess.Process();
-                    sf::Packet pak;
-                    pak<<dc_mess.m_nick<<dc_mess.m_message;
-                    socket.send(pak);
+                    SendDisconnectMessage();
                     rcv.terminate();
                     socket.disconnect();
                     if(sideselect==NULL)
@@ -80,6 +77,7 @@ Scene* MessageScreen::Run(sf::RenderWindow& Wind)
                         sideselect=new SideSelection;
                     }
                     delete this;
+                    msgscreen=NULL;
                     return sideselect;
                 }
                 else
@@ -262,10 +260,20 @@ void MessageScreen::ScrollToLastMessage()
     firstRow=lastRow-MAX_MESSAGES+1;
     printf("%d %d\n",lastRow,firstRow);
 }
+void MessageScreen::SendDisconnectMessage()
+{
+    Message dc_mess;
+    dc_mess.m_nick=nick+" ";
+    dc_mess.m_message="has disconnected!";
+    dc_mess.Process();
+    sf::Packet pak;
+    pak<<dc_mess.m_nick<<dc_mess.m_message;
+    socket.send(pak);
+}
 void Message::Process()
 {
     std::string aux;
-    for(int i=0;i<m_nick.size();i++)
+    for(int i=0; i<m_nick.size(); i++)
     {
         aux+=" ";
     }

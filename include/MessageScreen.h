@@ -10,6 +10,7 @@
 #define MAX_MESSAGES 22
 #define LINE_SIZE 61
 extern Scene* sideselect;
+extern Scene* msgscreen;
 extern sf::TcpSocket socket;
 extern std::string nick;
 struct Message
@@ -26,6 +27,7 @@ class MessageScreen : public Scene
         virtual Scene* Run(sf::RenderWindow& Wind);
         void DrawText(sf::RenderWindow& Wind);
         void ScrollToLastMessage();
+        void SendDisconnectMessage();
         void SENDER();
         void RECEIVER();
     protected:

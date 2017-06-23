@@ -2818,7 +2818,7 @@
 1496414677 source:d:\work\_git\hermes\src\messagescreen.cpp
 	"MessageScreen.h"
 
-1498079329 source:c:\users\mircea\desktop\tmp\hermes\main.cpp
+1498249214 source:c:\users\mircea\desktop\tmp\hermes\main.cpp
 	<iostream>
 	<cstdlib>
 	<SFML/Graphics.hpp>
@@ -3323,7 +3323,7 @@
 	<SFML/Network/IpAddress.hpp>
 	<vector>
 
-1498220353 c:\users\mircea\desktop\tmp\hermes\include\messagescreen.h
+1498249482 c:\users\mircea\desktop\tmp\hermes\include\messagescreen.h
 	<Scene.h>
 	<SideSelection.h>
 	<SFML/Audio.hpp>
@@ -3488,7 +3488,7 @@
 	<SFML/Network.hpp>
 	<iostream>
 
-1498221767 source:c:\users\mircea\desktop\tmp\hermes\src\messagescreen.cpp
+1498249482 source:c:\users\mircea\desktop\tmp\hermes\src\messagescreen.cpp
 	"MessageScreen.h"
 
 1498079329 c:\users\mircea\desktop\tmp\hermes\include\nicknameselection.h
