@@ -1,16 +1,20 @@
 #ifndef MESSAGESCREEN_H
 #define MESSAGESCREEN_H
 #include <Scene.h>
+#include<SideSelection.h>
 #include<SFML/Audio.hpp>
 #include<SFMl/Network.hpp>
 #include<TextBox.h>
+#include<Button.h>
 #include<bitset>
 #define MAX_MESSAGES 22
 #define LINE_SIZE 61
+extern Scene* sideselect;
 extern sf::TcpSocket socket;
 extern std::string nick;
 struct Message
 {
+    void Process();
     std::string m_nick;
     std::string m_message;
 };
@@ -37,6 +41,7 @@ class MessageScreen : public Scene
         std::vector<Message> MessageRows;
         std::vector<Message> MessageRowsOthers;
         TextBox* inputBox;
+        Button* DisconnectButton;
         int firstRow,lastRow;
         int number_of_messages;
         bool scrollEnabled;

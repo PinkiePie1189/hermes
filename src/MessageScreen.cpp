@@ -8,6 +8,7 @@ MessageScreen::MessageScreen()
     bg_texture.loadFromFile("res/5full.png");
     bg_sprite.setTexture(bg_texture);
     inputBox=new TextBox("res/fonts/micross.ttf",14,sf::Color::Black,sf::Vector2f(71,427));
+    DisconnectButton=new Button("res/buttons/disconnect_idle.png","res/buttons/disconnect_idle.png","res/buttons/disconnect_clicked.png",sf::Vector2f(506,25));
     textFont.loadFromFile("res/fonts/anon.ttf");
     m_messages.setFont(textFont);
     m_messages.setCharacterSize(12);
@@ -31,6 +32,9 @@ MessageScreen::~MessageScreen()
 {
     //dtor
     delete inputBox;
+    inputBox=NULL;
+    delete DisconnectButton;
+    DisconnectButton=NULL;
 }
 Scene* MessageScreen::Run(sf::RenderWindow& Wind)
 {
@@ -41,6 +45,7 @@ Scene* MessageScreen::Run(sf::RenderWindow& Wind)
     aux.play();
     sf::Thread rcv(&MessageScreen::RECEIVER,this);
     rcv.launch();
+    bool okDC=false;
     while(Wind.isOpen())
     {
         while(Wind.pollEvent(ev))
@@ -49,6 +54,38 @@ Scene* MessageScreen::Run(sf::RenderWindow& Wind)
             {
                 rcv.terminate();
                 Wind.close();
+            }
+            if(ev.type==sf::Event::MouseButtonPressed)
+            {
+                if(DisconnectButton->MouseInside(Wind))
+                {
+                    okDC=true;
+                }
+            }
+            if(ev.type==sf::Event::MouseButtonReleased)
+            {
+                if(okDC && DisconnectButton->MouseInside(Wind))
+                {
+                    Message dc_mess;
+                    dc_mess.m_nick=nick+" ";
+                    dc_mess.m_message="has disconnected!";
+                    dc_mess.Process();
+                    sf::Packet pak;
+                    pak<<dc_mess.m_nick<<dc_mess.m_message;
+                    socket.send(pak);
+                    rcv.terminate();
+                    socket.disconnect();
+                    if(sideselect==NULL)
+                    {
+                        sideselect=new SideSelection;
+                    }
+                    delete this;
+                    return sideselect;
+                }
+                else
+                {
+                    okDC=false;
+                }
             }
             if(ev.type==sf::Event::TextEntered)
             {
@@ -144,9 +181,11 @@ Scene* MessageScreen::Run(sf::RenderWindow& Wind)
             }
             inputBox->UpdateCursor(ev);
         }
+        DisconnectButton->Click(okDC && DisconnectButton->MouseInside(Wind));
         Wind.clear();
         Wind.draw(bg_sprite);
         inputBox->Draw(Wind);
+        DisconnectButton->Draw(Wind);
         DrawText(Wind);
         Wind.display();
     }
@@ -222,4 +261,13 @@ void MessageScreen::ScrollToLastMessage()
     lastRow=number_of_messages-1;
     firstRow=lastRow-MAX_MESSAGES+1;
     printf("%d %d\n",lastRow,firstRow);
+}
+void Message::Process()
+{
+    std::string aux;
+    for(int i=0;i<m_nick.size();i++)
+    {
+        aux+=" ";
+    }
+    m_message=aux+m_message;
 }
